@@ -1,0 +1,262 @@
+openapi: 3.0.0
+info:
+  title: Combined API Specification
+  version: 1.0.0
+paths:
+  /api/auth/register:
+    post:
+      summary: Register a new user
+      responses:
+        '200':
+          description: Register a new user
+  /api/auth/login:
+    post:
+      summary: Login user
+      responses:
+        '200':
+          description: Login user
+  /api/auth/refresh:
+    post:
+      summary: Refresh JWT token
+      responses:
+        '200':
+          description: Refresh JWT token
+  /api/auth/logout:
+    post:
+      summary: Logout user
+      responses:
+        '200':
+          description: Logout user
+  /api/auth/me:
+    get:
+      summary: Get authenticated user details
+      responses:
+        '200':
+          description: Get authenticated user details
+  /api/users:
+    get:
+      summary: List all users
+      responses:
+        '200':
+          description: List all users
+    post:
+      summary: Create a new user
+      responses:
+        '200':
+          description: Create a new user
+  /api/users/{id}:
+    get:
+      summary: 'Get user details for ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Get user details for ID: {id}'
+    put:
+      summary: 'Update user details for ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Update user details for ID: {id}'
+    delete:
+      summary: 'Delete user with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Delete user with ID: {id}'
+  /api/roles:
+    get:
+      summary: List all roles
+      responses:
+        '200':
+          description: List all roles
+    post:
+      summary: Create a new role
+      responses:
+        '200':
+          description: Create a new role
+  /api/roles/{id}:
+    get:
+      summary: 'Get role details for ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: Role ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Get role details for ID: {id}'
+    put:
+      summary: 'Update role details for ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: Role ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Update role details for ID: {id}'
+    delete:
+      summary: 'Delete role with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: Role ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Delete role with ID: {id}'
+  /api/admin/stats:
+    get:
+      summary: Get application statistics
+      responses:
+        '200':
+          description: Get application statistics
+  /api/admin/users:
+    delete:
+      summary: Bulk delete users
+      responses:
+        '200':
+          description: Bulk delete users
+  /api/admin/users/bulk:
+    post:
+      summary: Bulk create users
+      responses:
+        '200':
+          description: Bulk create users
+  /api/admin/logs:
+    get:
+      summary: Fetch application logs
+      responses:
+        '200':
+          description: Fetch application logs
+  /api/search/users:
+    get:
+      summary: Search for users based on criteria
+      responses:
+        '200':
+          description: Search for users based on criteria
+  /api/search/roles:
+    get:
+      summary: Search for roles based on criteria
+      responses:
+        '200':
+          description: Search for roles based on criteria
+  /api/config:
+    get:
+      summary: Get system configuration
+      responses:
+        '200':
+          description: Get system configuration
+    put:
+      summary: Update system configuration
+      responses:
+        '200':
+          description: Update system configuration
+  /api/audit/users/{id}:
+    get:
+      summary: 'Get audit logs for user with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Get audit logs for user with ID: {id}'
+  /api/audit/roles/{id}:
+    get:
+      summary: 'Get audit logs for role with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: Role ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Get audit logs for role with ID: {id}'
+  /api/health:
+    get:
+      summary: Health check for the application
+      responses:
+        '200':
+          description: Health check for the application
+  /api/users/{id}/activate:
+    patch:
+      summary: 'Activate user with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Activate user with ID: {id}'
+  /api/users/{id}/deactivate:
+    patch:
+      summary: 'Deactivate user with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Deactivate user with ID: {id}'
+  /api/roles/{id}/assign:
+    patch:
+      summary: 'Assign role with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: Role ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Assign role with ID: {id}'
+components:
+  schemas: {}
