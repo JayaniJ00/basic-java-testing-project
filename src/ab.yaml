@@ -1,0 +1,513 @@
+openapi: 3.0.0
+info:
+  title: Combined API Specification
+  version: 1.0.0
+paths:
+  /register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User registered successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+  /login:
+    post:
+      summary: Login an existing user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+              - username
+              - password
+      responses:
+        '200':
+          description: Login successful!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad Request
+  /api/auth/register:
+    post:
+      summary: Register a new user
+      responses:
+        '200':
+          description: User registered successfully
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /api/auth/login:
+    post:
+      summary: Login user
+      responses:
+        '200':
+          description: User logged in successfully
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+  /api/auth/refresh:
+    post:
+      summary: Refresh JWT token
+      responses:
+        '200':
+          description: Token refreshed successfully
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+  /api/auth/logout:
+    post:
+      summary: Logout user
+      responses:
+        '200':
+          description: User logged out successfully
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+  /api/auth/me:
+    get:
+      summary: Get authenticated user details
+      responses:
+        '200':
+          description: Authenticated user details
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+  /api/users:
+    get:
+      summary: List all users
+      responses:
+        '200':
+          description: List of all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '500':
+          description: Internal Server Error
+    post:
+      summary: Create a new user
+      responses:
+        '201':
+          description: User created successfully
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /api/users/{id}:
+    get:
+      summary: 'Get user details for ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'User details for ID: {id}'
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+    put:
+      summary: 'Update user details for ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: User details updated successfully
+        '400':
+          description: Bad Request
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+    delete:
+      summary: 'Delete user with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: User deleted successfully
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+  /api/users/{id}/activate:
+    patch:
+      summary: 'Activate user with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: User activated successfully
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+  /api/users/{id}/deactivate:
+    patch:
+      summary: 'Deactivate user with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: User deactivated successfully
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+  /api/roles:
+    get:
+      summary: List all roles
+      responses:
+        '200':
+          description: List of all roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '500':
+          description: Internal Server Error
+    post:
+      summary: Create a new role
+      responses:
+        '201':
+          description: Role created successfully
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /api/roles/{id}:
+    get:
+      summary: 'Get role details for ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: Role ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Role details for ID: {id}'
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Role not found
+        '500':
+          description: Internal Server Error
+    put:
+      summary: 'Update role details for ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: Role ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Role details updated successfully
+        '400':
+          description: Bad Request
+        '404':
+          description: Role not found
+        '500':
+          description: Internal Server Error
+    delete:
+      summary: 'Delete role with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: Role ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: Role deleted successfully
+        '404':
+          description: Role not found
+        '500':
+          description: Internal Server Error
+  /api/roles/{id}/assign:
+    patch:
+      summary: 'Assign role with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: Role ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Role assigned successfully
+        '404':
+          description: Role not found
+        '500':
+          description: Internal Server Error
+  /api/admin/stats:
+    get:
+      summary: Get application statistics
+      responses:
+        '200':
+          description: Application statistics
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: Internal Server Error
+  /api/admin/users:
+    get:
+      summary: List users with admin-level filtering
+      responses:
+        '200':
+          description: List of users with admin-level filtering
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '500':
+          description: Internal Server Error
+    delete:
+      summary: Bulk delete users
+      responses:
+        '200':
+          description: Users deleted successfully
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /api/admin/users/bulk:
+    post:
+      summary: Bulk create users
+      responses:
+        '201':
+          description: Users created successfully
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /api/admin/logs:
+    get:
+      summary: Fetch application logs
+      responses:
+        '200':
+          description: Application logs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '500':
+          description: Internal Server Error
+  /api/search/users:
+    get:
+      summary: Search for users based on criteria
+      responses:
+        '200':
+          description: List of users matching the search criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '500':
+          description: Internal Server Error
+  /api/search/roles:
+    get:
+      summary: Search for roles based on criteria
+      responses:
+        '200':
+          description: List of roles matching the search criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '500':
+          description: Internal Server Error
+  /api/config:
+    get:
+      summary: Get system configuration
+      responses:
+        '200':
+          description: System configuration
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: Internal Server Error
+    put:
+      summary: Update system configuration
+      responses:
+        '200':
+          description: System configuration updated successfully
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /api/audit/users/{id}:
+    get:
+      summary: 'Get audit logs for user with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Audit logs for user with ID: {id}'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+  /api/audit/roles/{id}:
+    get:
+      summary: 'Get audit logs for role with ID: {id}'
+      parameters:
+      - name: id
+        in: path
+        description: Role ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: 'Audit logs for role with ID: {id}'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '404':
+          description: Role not found
+        '500':
+          description: Internal Server Error
+  /api/health:
+    get:
+      summary: Health check for the application
+      responses:
+        '200':
+          description: Application health check
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        username:
+          type: string
+          readOnly: true
+        password:
+          type: string
+          writeOnly: true
+        role:
+          type: string
+      required:
+      - username
+      - password
+      - role
